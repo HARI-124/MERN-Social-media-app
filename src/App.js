@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {useDispatch} from "react-redux";
+import {getPosts} from "./actions/posts.js"
+import { useEffect,useState } from 'react';
+import Form from "./components/Form/Form"
+import Navbar from "./components/Navbar/Navbar"
+import Posts from './components/Posts/Posts';
+import Create from './components/Create/Create';
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  
+  useEffect( ()=>{
+      dispatch(getPosts()); // it will return the actions and the dispatch function will dispatch the actions to the reducers.
+  },[dispatch])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <Navbar />
+    
+    <div>
+    <Create></Create>
     </div>
-  );
+   
+  
+    
+    
+  <Posts></Posts>
+    </div>
+  )
 }
 
-export default App;
+export default App
